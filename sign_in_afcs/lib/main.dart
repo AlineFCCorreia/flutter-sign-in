@@ -6,7 +6,7 @@ import 'package:sign_in_afcs/src/modules/user/user_module.dart';
 
 
 void main() {
-  runApp(ModularApp(module: AuthModule(), child: const MainApp()));
+  runApp(ModularApp(module: UserModule(), child: const MainApp()));
 }
 
 
