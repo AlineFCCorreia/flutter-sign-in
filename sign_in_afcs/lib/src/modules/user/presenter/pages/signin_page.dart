@@ -10,10 +10,26 @@ class SignInPage extends StatefulWidget {
 class _SigninPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(10.0)),
-        
+    return const Scaffold(
+      body: 
+        Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text("Welcome back",
+              style: TextStyle( fontSize: 20,
+              fontWeight: FontWeight.bold),
+              ),
+              Text("Enter your credential to login",
+              style: TextStyle(fontSize: 10),
+              )
+            ],
+            
+            
+            ),
+        )
         
       
 
