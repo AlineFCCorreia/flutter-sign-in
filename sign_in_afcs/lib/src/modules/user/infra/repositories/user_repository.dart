@@ -31,7 +31,7 @@ class UserRepository implements IUserRepository {
   Future<(IAppError?, bool?)> signup(User data) async {
     try {
       final userEncoded = userAdapter.protoToData(data);
-      final response = await _signInDatasource.login(userEncoded!);
+      final response = await _signInDatasource.login(userEncoded!); // TODO fix to signup
 
       if (response != null) {
         return (null, true);

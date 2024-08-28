@@ -21,7 +21,7 @@ class SignUpDatasource implements ISignUpDatasource {
         return true;
       }
     } catch (e) {
-      throw SignInError('error to signup, $e');
+      throw SignUpError('error to signup, $e');
     }
     return null;
   }
