@@ -14,7 +14,8 @@ class TasksModule extends Module {
 
   @override
   void routes(r) {
-    r.child(Modular.initialRoute, child: (context) => const TasksPage());
+    r.child(Modular.initialRoute,
+        child: (context) => TasksPage(user: r.args.data));
     //r.child("/tasks/", child: (context) => const TasksPage());
   }
 }

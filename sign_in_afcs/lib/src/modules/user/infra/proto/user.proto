@@ -5,3 +5,4 @@ message User{
     required string name = 2;
     required string password = 3;
 }
+

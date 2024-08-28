@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:sign_in_afcs/src/modules/tasks/tasks_module.dart';
+import 'package:sign_in_afcs/src/modules/user/presenter/stores/user_store.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -12,6 +12,14 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SigninPageState extends State<SignInPage> {
+  late final UserStore userStore;
+
+  @override
+  void initState() {
+    super.initState();
+    userStore = context.read<UserStore>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,29 +45,49 @@ class _SigninPageState extends State<SignInPage> {
           const SizedBox(
             height: 10,
           ),
-          const TextField(
-            decoration: InputDecoration(
-                labelText: "Username",
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                prefixIcon: Icon(Icons.person)),
+          Observer(
+            builder: (_) => TextField(
+              onChanged: (value) {
+                userStore.username = value;
+                //print(userStore.username);
+              },
+              decoration: const InputDecoration(
+                  labelText: "Username",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  prefixIcon: Icon(Icons.person)),
+            ),
           ),
           const SizedBox(
             height: 10,
           ),
-          const TextField(
-            decoration: InputDecoration(
-              labelText: "Password",
-              prefixIcon: Icon(Icons.password_rounded),
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
+          Observer(
+            builder: (_) => TextField(
+              obscureText: true,
+              onChanged: (value) {
+                userStore.password = value;
+                //print(userStore.password);
+              },
+              decoration: const InputDecoration(
+                labelText: "Password",
+                prefixIcon: Icon(Icons.password_rounded),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+              ),
             ),
           ),
           const SizedBox(
             height: 10,
           ),
           ElevatedButton(
-              onPressed: () => Modular.to.navigate("/tasks_page/"),
+              onPressed: () async {
+                print(userStore.username);
+                print(userStore.password);
+                await userStore.login(userStore.username, userStore.password);
+
+                Modular.to.navigate("/tasks_page/");
+              },
+              //onPressed: () => Modular.to.navigate("/tasks_page/"),
               child: const Text("Login")),
           const SizedBox(
             height: 10,

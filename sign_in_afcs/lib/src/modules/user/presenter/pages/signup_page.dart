@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:sign_in_afcs/src/modules/user/presenter/stores/user_store.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -10,6 +11,14 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  late final UserStore userStore;
+
+  @override
+  void initState() {
+    super.initState();
+    userStore = context.read<UserStore>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +74,10 @@ class _SignUpPageState extends State<SignUpPage> {
             height: 10,
           ),
           ElevatedButton(
-              onPressed: () => Modular.to.navigate("/"),
+              onPressed: () async {
+                await userStore.signup(userStore.username, userStore.password);
+                Modular.to.navigate("/");
+              },
               child: const Text("Sign up")),
           const SizedBox(
             height: 20,
