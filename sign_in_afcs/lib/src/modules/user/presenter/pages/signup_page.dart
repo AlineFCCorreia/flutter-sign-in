@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:sign_in_afcs/src/modules/user/presenter/stores/user_store.dart';
 
@@ -41,33 +42,52 @@ class _SignUpPageState extends State<SignUpPage> {
           const SizedBox(
             height: 10,
           ),
-          const TextField(
-            decoration: InputDecoration(
-                labelText: "Username",
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                prefixIcon: Icon(Icons.person)),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const TextField(
-            decoration: InputDecoration(
-              labelText: "Password",
-              prefixIcon: Icon(Icons.password_rounded),
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
+          Observer(
+            builder: (_) =>  TextField(
+              onChanged: (value) {
+                userStore.username = value;
+                //print(userStore.password);
+              },
+              decoration: const InputDecoration(
+                
+                  labelText: "Username",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  prefixIcon: Icon(Icons.person)),
             ),
           ),
           const SizedBox(
             height: 10,
           ),
-          const TextField(
-            decoration: InputDecoration(
-              labelText: "Confirm Password",
-              prefixIcon: Icon(Icons.password_rounded),
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
+          Observer(
+            builder: (_) => TextField(
+              onChanged: (value) {
+                userStore.password = value;
+                //print(userStore.password);
+              },
+              decoration: const InputDecoration(
+                labelText: "Password",
+                prefixIcon: Icon(Icons.password_rounded),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Observer(
+            builder: (_) => TextField(
+              onChanged: (value) {
+                userStore.confirmPassword = value;
+                //print(userStore.password);
+              },
+              decoration: const InputDecoration(
+                labelText: "Confirm Password",
+                prefixIcon: Icon(Icons.password_rounded),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+              ),
             ),
           ),
           const SizedBox(
@@ -75,7 +95,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           ElevatedButton(
               onPressed: () async {
-                await userStore.signup(userStore.username, userStore.password);
+                await userStore.signup(userStore.username, userStore.password, userStore.confirmPassword);
                 Modular.to.navigate("/");
               },
               child: const Text("Sign up")),

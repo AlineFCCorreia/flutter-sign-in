@@ -2,13 +2,15 @@ import 'package:sign_in_afcs/src/modules/user/domain/errors/user_error.dart';
 import 'package:sign_in_afcs/src/modules/user/domain/repositories/user_repository.dart';
 import 'package:sign_in_afcs/src/modules/user/infra/adapters/user_adapter.dart';
 import 'package:sign_in_afcs/src/modules/user/infra/datasources/signin_datasource.dart';
+import 'package:sign_in_afcs/src/modules/user/infra/datasources/signup_datasource.dart';
 import 'package:sign_in_afcs/src/modules/user/infra/proto/user.pb.dart';
 
 class UserRepository implements IUserRepository {
   final ISignInDatasource _signInDatasource;
+  final ISignUpDatasource _signUpDatasource;
   final userAdapter = UserAdapter();
 
-  UserRepository(this._signInDatasource);
+  UserRepository(this._signInDatasource, this._signUpDatasource);
 
   @override
   Future<(IAppError?, User?)> login(User data) async {
@@ -31,7 +33,7 @@ class UserRepository implements IUserRepository {
   Future<(IAppError?, bool?)> signup(User data) async {
     try {
       final userEncoded = userAdapter.protoToData(data);
-      final response = await _signInDatasource.login(userEncoded!); // TODO fix to signup
+      final response = await _signUpDatasource.signup(userEncoded!);
 
       if (response != null) {
         return (null, true);

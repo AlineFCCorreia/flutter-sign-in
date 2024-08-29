@@ -9,11 +9,11 @@ part 'user_store.g.dart';
 class UserStore = _UserStore with _$UserStore;
 
 abstract class _UserStore with Store {
-  late final ILoginUseCase loginUseCase;
-  late final ISignupUseCase signUseCase;
+  final ILoginUseCase loginUseCase;
+  final ISignupUseCase signupUseCase;
   final actualUser = User();
 
-  _UserStore(this.loginUseCase, this.signUseCase);
+  _UserStore(this.loginUseCase, this.signupUseCase);
   //final usecase = UserUseCases(_repository)
 
   @observable
@@ -22,24 +22,31 @@ abstract class _UserStore with Store {
   @observable
   String password = '';
 
-  @action
+  @observable
+  String confirmPassword = '';
+
   Future<bool> login(String username, String password) async {
     actualUser.name = username;
     actualUser.password = password;
     final response = await loginUseCase.call(actualUser);
     if (response.$2 != null) {
+      actualUser.id = response.$2!.id;
       return true;
     }
     return false;
   }
 
-  @action
-  Future<bool> signup(String username, String password) async {
-    final response =
-        await loginUseCase.call(User(name: username, password: password));
-    if (response.$2 != null) {
-      return true;
+  Future<bool> signup(
+      String username, String password, String confirmPassword) async {
+    if (password == confirmPassword) {
+      final response =
+          await signupUseCase.call(User(name: username, password: password));
+      if (response.$2 != null) {
+        return true;
+      }
+      return false;
+    } else {
+      return false;
     }
-    return false;
   }
 }

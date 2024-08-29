@@ -41,27 +41,28 @@ mixin _$UserStore on _UserStore, Store {
     });
   }
 
-  late final _$loginAsyncAction =
-      AsyncAction('_UserStore.login', context: context);
+  late final _$confirmPasswordAtom =
+      Atom(name: '_UserStore.confirmPassword', context: context);
 
   @override
-  Future<bool> login(String username, String password) {
-    return _$loginAsyncAction.run(() => super.login(username, password));
+  String get confirmPassword {
+    _$confirmPasswordAtom.reportRead();
+    return super.confirmPassword;
   }
 
-  late final _$signupAsyncAction =
-      AsyncAction('_UserStore.signup', context: context);
-
   @override
-  Future<bool> signup(String username, String password) {
-    return _$signupAsyncAction.run(() => super.signup(username, password));
+  set confirmPassword(String value) {
+    _$confirmPasswordAtom.reportWrite(value, super.confirmPassword, () {
+      super.confirmPassword = value;
+    });
   }
 
   @override
   String toString() {
     return '''
 username: ${username},
-password: ${password}
+password: ${password},
+confirmPassword: ${confirmPassword}
     ''';
   }
 }

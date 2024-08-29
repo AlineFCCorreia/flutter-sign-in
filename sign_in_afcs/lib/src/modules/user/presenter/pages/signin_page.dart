@@ -81,11 +81,11 @@ class _SigninPageState extends State<SignInPage> {
           ),
           ElevatedButton(
               onPressed: () async {
-                print(userStore.username);
-                print(userStore.password);
-                await userStore.login(userStore.username, userStore.password);
-
-                Modular.to.navigate("/tasks_page/");
+                if (await userStore.login(
+                    userStore.username, userStore.password)) {
+                  Modular.to
+                      .navigate("/tasks/", arguments: userStore.actualUser);
+                }
               },
               //onPressed: () => Modular.to.navigate("/tasks_page/"),
               child: const Text("Login")),
