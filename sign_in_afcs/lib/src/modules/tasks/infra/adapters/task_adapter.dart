@@ -4,7 +4,7 @@ import 'package:sign_in_afcs/src/modules/tasks/infra/proto/tasks.pb.dart';
 import "package:sign_in_afcs/src/modules/user/infra/proto/user.pb.dart";
 
 class TaskAdapter {
-  User? dataFromProto(Uint8List? data) {
+  static User? dataToProto(Uint8List? data) {
     try {
       if (data != null) {
         return User.fromBuffer(data);
@@ -15,7 +15,7 @@ class TaskAdapter {
     }
   }
 
-  Uint8List? protoToData(Task data) {
+  static Uint8List? protoToData(Task data) {
     try {
       return data.writeToBuffer();
     } catch (e) {

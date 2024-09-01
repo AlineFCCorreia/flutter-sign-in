@@ -50,18 +50,16 @@ class _TasksPageState extends State<TasksPage> {
             Text(' ${widget.user?.name}\'s Task List',
                 style:
                     const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            TextField(
-              Observer(
-                builder: (_) => TextField(
-                  onChanged: (value) {
-                    userStore.username = value;
-                  },
-                  decoration: const InputDecoration(
-                      labelText: "Username",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      prefixIcon: Icon(Icons.person)),
-                ),
+            Observer(
+              builder: (_) => TextField(
+                onChanged: (value) {
+                  // userStore.username = value;
+                },
+                decoration: const InputDecoration(
+                    labelText: "Username",
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    prefixIcon: Icon(Icons.person)),
               ),
             ),
           ],

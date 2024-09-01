@@ -3,21 +3,21 @@ import 'package:sign_in_afcs/src/modules/tasks/domain/repositories/tasks_reposit
 import 'package:sign_in_afcs/src/modules/tasks/infra/proto/tasks.pb.dart';
 
 abstract class IGetTasksUseCase {
-  Future<(IAppError?, bool?)> call(Task task);
+  Future<(IAppError?, Tasks?)> call(String userId);
 }
 
 class GetTasksUseCase implements IGetTasksUseCase {
-  final IGetTasksUseCase _repository;
+  final ITasksRepository _repository;
 
   GetTasksUseCase(this._repository);
 
   @override
-  Future<(IAppError?, bool?)> call(Task task) async {
+  Future<(IAppError?, Tasks?)> call(String userId) async {
     // if (user.name.isEmpty) {
 
     // } else {
 
     // }
-    return await _repository.getTasks(task);
+    return await _repository.getTasks(userId);
   }
 }

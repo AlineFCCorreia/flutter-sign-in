@@ -5,6 +5,6 @@ abstract class ITasksRepository {
   Future<(IAppError?, bool?)> addTask(Task task);
   //vai ser implementado na infra
 
-  Future<(IAppError?, Tasks?)> geTasks(String userId);
+  Future<(IAppError?, Tasks?)> getTasks(String userId);
   //vai ser implementado na infra
 }
