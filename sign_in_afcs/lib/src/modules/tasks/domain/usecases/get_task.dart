@@ -3,7 +3,7 @@ import 'package:sign_in_afcs/src/modules/tasks/domain/repositories/tasks_reposit
 import 'package:sign_in_afcs/src/modules/tasks/infra/proto/tasks.pb.dart';
 
 abstract class IGetTasksUseCase {
-  Future<(IAppError?, Tasks?)> call(String userId);
+  Future<(ITaskError?, List<Task>?)> call(String userId);
 }
 
 class GetTasksUseCase implements IGetTasksUseCase {
@@ -12,7 +12,7 @@ class GetTasksUseCase implements IGetTasksUseCase {
   GetTasksUseCase(this._repository);
 
   @override
-  Future<(IAppError?, Tasks?)> call(String userId) async {
+  Future<(ITaskError?, List<Task>?)> call(String userId) async {
     // if (user.name.isEmpty) {
 
     // } else {

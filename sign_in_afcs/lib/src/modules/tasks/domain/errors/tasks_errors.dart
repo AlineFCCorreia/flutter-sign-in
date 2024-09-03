@@ -1,42 +1,42 @@
-abstract class IAppError {
+abstract class ITaskError {
   String get message;
   String? get tracking;
 }
 
-class AppError implements IAppError {
+class TaskError implements ITaskError {
   @override
   final String message;
 
   @override
   final String? tracking;
 
-  AppError(this.message, [this.tracking]);
+  TaskError(this.message, [this.tracking]);
 }
 
-class DomainError extends AppError {
+class DomainError extends TaskError {
   DomainError(super.message, [super.tracking]);
 }
 
-class MainRepositoryError extends AppError {
+class MainRepositoryError extends TaskError {
   MainRepositoryError(super.message, [super.tracking]);
 }
 
-class MainDatasourceError extends AppError {
+class MainDatasourceError extends TaskError {
   MainDatasourceError(super.message, [super.tracking]);
 }
 
-class DecodeError extends AppError {
+class DecodeError extends TaskError {
   DecodeError(super.message, [super.tracking]);
 }
 
-class AddTaskError extends AppError {
+class AddTaskError extends TaskError {
   AddTaskError(super.message, [super.tracking]);
 }
 
-class GetErrorError extends AppError {
-  GetErrorError(super.message, [super.tracking]);
+class GetTaskError extends TaskError {
+  GetTaskError(super.message, [super.tracking]);
 }
 
-class TaskError extends AppError {
-  TaskError(super.message, [super.tracking]);
+class TasksError extends TaskError {
+  TasksError(super.message, [super.tracking]);
 }

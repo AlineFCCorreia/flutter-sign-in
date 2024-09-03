@@ -5,7 +5,7 @@ import 'package:sign_in_afcs/src/modules/tasks/infra/proto/tasks.pb.dart';
 
 
 abstract class IAddTaskUseCase {
-  Future<(IAppError?, bool?)> call(Task task);
+  Future<(ITaskError?, bool?)> call(Task task);
 }
 
 class AddTaskUseCase implements IAddTaskUseCase {
@@ -14,7 +14,7 @@ class AddTaskUseCase implements IAddTaskUseCase {
   AddTaskUseCase(this._repository);
 
   @override
-  Future<(IAppError?, bool?)> call(Task task) async {
+  Future<(ITaskError?, bool?)> call(Task task) async {
     // if (user.name.isEmpty) {
 
     // } else {

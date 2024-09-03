@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:sign_in_afcs/src/modules/user/presenter/stores/user_store.dart';
 
@@ -45,35 +44,31 @@ class _SigninPageState extends State<SignInPage> {
           const SizedBox(
             height: 10,
           ),
-          Observer(
-            builder: (_) => TextField(
-              onChanged: (value) {
-                userStore.username = value;
-                //print(userStore.username);
-              },
-              decoration: const InputDecoration(
-                  labelText: "Username",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
-                  prefixIcon: Icon(Icons.person)),
-            ),
+          TextField(
+            onChanged: (value) {
+              userStore.username = value;
+              //print(userStore.username);
+            },
+            decoration: const InputDecoration(
+                labelText: "Username",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                prefixIcon: Icon(Icons.person)),
           ),
           const SizedBox(
             height: 10,
           ),
-          Observer(
-            builder: (_) => TextField(
-              obscureText: true,
-              onChanged: (value) {
-                userStore.password = value;
-                //print(userStore.password);
-              },
-              decoration: const InputDecoration(
-                labelText: "Password",
-                prefixIcon: Icon(Icons.password_rounded),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-              ),
+          TextField(
+            obscureText: true,
+            onChanged: (value) {
+              userStore.password = value;
+              //print(userStore.password);
+            },
+            decoration: const InputDecoration(
+              labelText: "Password",
+              prefixIcon: Icon(Icons.password_rounded),
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
             ),
           ),
           const SizedBox(
@@ -83,8 +78,9 @@ class _SigninPageState extends State<SignInPage> {
               onPressed: () async {
                 if (await userStore.login(
                     userStore.username, userStore.password)) {
-                  Modular.to
-                      .navigate("/tasks/", arguments: userStore.actualUser);
+                  print(userStore.actualUser);
+                  Modular.to.navigate("/task_module/",
+                      arguments: userStore.actualUser);
                 }
               },
               //onPressed: () => Modular.to.navigate("/tasks_page/"),

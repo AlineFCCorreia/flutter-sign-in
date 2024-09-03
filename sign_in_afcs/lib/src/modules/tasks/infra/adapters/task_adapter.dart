@@ -1,13 +1,13 @@
 import 'dart:typed_data';
 import 'package:sign_in_afcs/src/modules/tasks/domain/errors/tasks_errors.dart';
 import 'package:sign_in_afcs/src/modules/tasks/infra/proto/tasks.pb.dart';
-import "package:sign_in_afcs/src/modules/user/infra/proto/user.pb.dart";
 
 class TaskAdapter {
-  static User? dataToProto(Uint8List? data) {
+  static List<Task>? dataToProto(Uint8List? data) {
     try {
       if (data != null) {
-        return User.fromBuffer(data);
+        final response =  Tasks.fromBuffer(data);
+        return response.tasks;
       }
       return null;
     } catch (e) {

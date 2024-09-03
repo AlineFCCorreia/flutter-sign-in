@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:sign_in_afcs/src/modules/tasks/presenter/pages/create_tasks_page.dart';
 import 'package:sign_in_afcs/src/modules/tasks/tasks_module.dart';
 import 'package:sign_in_afcs/src/modules/user/domain/repositories/user_repository.dart';
 import 'package:sign_in_afcs/src/modules/user/domain/usecases/signin_usecase.dart';
@@ -39,6 +40,6 @@ class UserModule extends Module {
   void routes(r) {
     r.child(Modular.initialRoute, child: (context) => const SignInPage());
     r.child("/sign_up/", child: (context) => const SignUpPage());
-    r.module("/tasks/", module: TasksModule());
+    r.module("/task_module/", module: TasksModule());
   }
 }
