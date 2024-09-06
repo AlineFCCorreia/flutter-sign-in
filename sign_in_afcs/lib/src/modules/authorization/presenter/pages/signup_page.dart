@@ -12,13 +12,18 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  late final AuthorizationStore userStore;
+  late final AuthorizationStore authorizationStore;
 
   @override
   void initState() {
     super.initState();
-    userStore = context.read<AuthorizationStore>();
+    authorizationStore = context.read<AuthorizationStore>();
   }
+
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +48,10 @@ class _SignUpPageState extends State<SignUpPage> {
             height: 10,
           ),
           Observer(
-            builder: (_) =>  TextField(
-              onChanged: (value) {
-                userStore.username = value;
-                //print(userStore.password);
-              },
+            builder: (_) => TextField(
+              controller: _usernameController,
+              onChanged: (value) {},
               decoration: const InputDecoration(
-                
                   labelText: "Username",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -61,14 +63,21 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           Observer(
             builder: (_) => TextField(
-              onChanged: (value) {
-                userStore.password = value;
-                //print(userStore.password);
-              },
-              decoration: const InputDecoration(
+              controller: _passwordController,
+              onChanged: (value) {},
+              obscureText: authorizationStore.showPassword? false: true,
+              decoration: InputDecoration(
+                suffixIcon: IconButton(
+                  icon: Icon(authorizationStore.showPassword
+                      ? Icons.visibility
+                      : Icons.visibility_off),
+                  onPressed: () {
+                    authorizationStore.toggleShowPassword();
+                  },
+                ),
                 labelText: "Password",
-                prefixIcon: Icon(Icons.password_rounded),
-                border: OutlineInputBorder(
+                prefixIcon: const Icon(Icons.password_rounded),
+                border: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10))),
               ),
             ),
@@ -78,14 +87,21 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           Observer(
             builder: (_) => TextField(
-              onChanged: (value) {
-                userStore.confirmPassword = value;
-                //print(userStore.password);
-              },
-              decoration: const InputDecoration(
+              obscureText: authorizationStore.showPassword? false: true,
+              controller: _confirmPasswordController,
+              onChanged: (value) {},
+              decoration: InputDecoration(
+                suffixIcon: IconButton(
+                  icon: Icon(authorizationStore.showPassword
+                      ? Icons.visibility
+                      : Icons.visibility_off),
+                  onPressed: () {
+                    authorizationStore.toggleShowPassword();
+                  },
+                ),
                 labelText: "Confirm Password",
-                prefixIcon: Icon(Icons.password_rounded),
-                border: OutlineInputBorder(
+                prefixIcon: const Icon(Icons.password_rounded),
+                border: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10))),
               ),
             ),
@@ -95,7 +111,8 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           ElevatedButton(
               onPressed: () async {
-                await userStore.signup(userStore.username, userStore.password, userStore.confirmPassword);
+                await authorizationStore.signup(_usernameController.text,
+                    _passwordController.text, _confirmPasswordController.text);
                 Modular.to.navigate("/");
               },
               child: const Text("Sign up")),

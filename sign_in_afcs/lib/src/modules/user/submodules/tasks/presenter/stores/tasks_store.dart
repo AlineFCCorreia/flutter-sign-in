@@ -1,7 +1,7 @@
 import 'package:mobx/mobx.dart';
-import 'package:sign_in_afcs/src/modules/user/tasks/domain/usecases/add_task.dart';
-import 'package:sign_in_afcs/src/modules/user/tasks/domain/usecases/get_task.dart';
-import 'package:sign_in_afcs/src/modules/user/tasks/infra/proto/tasks.pb.dart';
+import 'package:sign_in_afcs/src/modules/user/submodules/tasks/domain/usecases/add_task.dart';
+import 'package:sign_in_afcs/src/modules/user/submodules/tasks/domain/usecases/get_task.dart';
+import 'package:sign_in_afcs/src/modules/user/submodules/tasks/infra/proto/tasks.pb.dart';
 
 part 'tasks_store.g.dart';
 

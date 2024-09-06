@@ -9,60 +9,40 @@ part of 'authorization_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$AuthorizationStore on _AuthorizationStore, Store {
-  late final _$usernameAtom =
-      Atom(name: '_AuthorizationStore.username', context: context);
+  late final _$showPasswordAtom =
+      Atom(name: '_AuthorizationStore.showPassword', context: context);
 
   @override
-  String get username {
-    _$usernameAtom.reportRead();
-    return super.username;
+  bool get showPassword {
+    _$showPasswordAtom.reportRead();
+    return super.showPassword;
   }
 
   @override
-  set username(String value) {
-    _$usernameAtom.reportWrite(value, super.username, () {
-      super.username = value;
+  set showPassword(bool value) {
+    _$showPasswordAtom.reportWrite(value, super.showPassword, () {
+      super.showPassword = value;
     });
   }
 
-  late final _$passwordAtom =
-      Atom(name: '_AuthorizationStore.password', context: context);
+  late final _$_AuthorizationStoreActionController =
+      ActionController(name: '_AuthorizationStore', context: context);
 
   @override
-  String get password {
-    _$passwordAtom.reportRead();
-    return super.password;
-  }
-
-  @override
-  set password(String value) {
-    _$passwordAtom.reportWrite(value, super.password, () {
-      super.password = value;
-    });
-  }
-
-  late final _$confirmPasswordAtom =
-      Atom(name: '_AuthorizationStore.confirmPassword', context: context);
-
-  @override
-  String get confirmPassword {
-    _$confirmPasswordAtom.reportRead();
-    return super.confirmPassword;
-  }
-
-  @override
-  set confirmPassword(String value) {
-    _$confirmPasswordAtom.reportWrite(value, super.confirmPassword, () {
-      super.confirmPassword = value;
-    });
+  void toggleShowPassword() {
+    final _$actionInfo = _$_AuthorizationStoreActionController.startAction(
+        name: '_AuthorizationStore.toggleShowPassword');
+    try {
+      return super.toggleShowPassword();
+    } finally {
+      _$_AuthorizationStoreActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
   String toString() {
     return '''
-username: ${username},
-password: ${password},
-confirmPassword: ${confirmPassword}
+showPassword: ${showPassword}
     ''';
   }
 }

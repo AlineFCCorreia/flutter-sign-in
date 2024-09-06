@@ -16,14 +16,14 @@ abstract class _AuthorizationStore with Store {
   _AuthorizationStore(this.loginUseCase, this.signupUseCase);
   //final usecase = UserUseCases(_repository)
 
-  @observable
-  String username = '';
 
   @observable
-  String password = '';
+  bool showPassword = false;
 
-  @observable
-  String confirmPassword = '';
+  @action
+  void toggleShowPassword() => showPassword = !showPassword;
+
+  
 
   Future<bool> login(String username, String password) async {
     actualUser.name = username;

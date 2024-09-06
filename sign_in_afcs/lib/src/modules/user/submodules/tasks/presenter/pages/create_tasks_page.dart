@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:sign_in_afcs/src/modules/user/tasks/presenter/stores/tasks_store.dart';
+import 'package:sign_in_afcs/src/modules/user/submodules/tasks/presenter/stores/tasks_store.dart';
 import 'package:sign_in_afcs/src/modules/authorization/infra/proto/user.pb.dart';
 
 class CreateTaskPage extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:sign_in_afcs/src/modules/user/tasks/tasks_module.dart';
+import 'package:sign_in_afcs/src/modules/user/submodules/tasks/tasks_module.dart';
 import 'package:sign_in_afcs/src/modules/authorization/domain/repositories/authorization_repository.dart';
 import 'package:sign_in_afcs/src/modules/authorization/domain/usecases/signin_usecase.dart';
 import 'package:sign_in_afcs/src/modules/authorization/domain/usecases/signup_usecase.dart';

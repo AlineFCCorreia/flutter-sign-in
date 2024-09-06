@@ -1,6 +1,6 @@
 import 'dart:typed_data';
-import 'package:sign_in_afcs/src/modules/user/tasks/domain/errors/tasks_errors.dart';
-import 'package:sign_in_afcs/src/modules/user/tasks/infra/proto/tasks.pb.dart';
+import 'package:sign_in_afcs/src/modules/user/submodules/tasks/domain/errors/tasks_errors.dart';
+import 'package:sign_in_afcs/src/modules/user/submodules/tasks/infra/proto/tasks.pb.dart';
 
 class TaskAdapter {
   static List<Task>? dataToProto(Uint8List? data) {

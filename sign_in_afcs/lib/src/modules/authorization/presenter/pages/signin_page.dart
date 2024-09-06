@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:sign_in_afcs/src/modules/authorization/presenter/stores/authorization_store.dart';
 
@@ -11,13 +12,16 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SigninPageState extends State<SignInPage> {
-  late final AuthorizationStore userStore;
+  late final AuthorizationStore authorizationStore;
 
   @override
   void initState() {
     super.initState();
-    userStore = context.read<AuthorizationStore>();
+    authorizationStore = context.read<AuthorizationStore>();
   }
+
+  final TextEditingController _userNameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +49,8 @@ class _SigninPageState extends State<SignInPage> {
             height: 10,
           ),
           TextField(
-            onChanged: (value) {
-              userStore.username = value;
-              //print(userStore.username);
-            },
+            controller: _userNameController,
+            onChanged: (value) {},
             decoration: const InputDecoration(
                 labelText: "Username",
                 border: OutlineInputBorder(
@@ -58,17 +60,26 @@ class _SigninPageState extends State<SignInPage> {
           const SizedBox(
             height: 10,
           ),
-          TextField(
-            obscureText: true,
-            onChanged: (value) {
-              userStore.password = value;
-              //print(userStore.password);
-            },
-            decoration: const InputDecoration(
-              labelText: "Password",
-              prefixIcon: Icon(Icons.password_rounded),
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
+
+          Observer(
+            builder: (_) =>  TextField(
+              obscureText: authorizationStore.showPassword ? false : true,
+              controller: _passwordController,
+              onChanged: (value) {},
+              decoration: InputDecoration(
+                labelText: "Password",
+                suffixIcon: IconButton(
+                  icon: Icon(authorizationStore.showPassword
+                      ? Icons.visibility
+                      : Icons.visibility_off),
+                  onPressed: () {
+                    authorizationStore.toggleShowPassword();
+                  },
+                ),
+                prefixIcon: const Icon(Icons.password_rounded),
+                border: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+              ),
             ),
           ),
           const SizedBox(
@@ -76,11 +87,11 @@ class _SigninPageState extends State<SignInPage> {
           ),
           ElevatedButton(
               onPressed: () async {
-                if (await userStore.login(
-                    userStore.username, userStore.password)) {
-                  print(userStore.actualUser);
+                if (await authorizationStore.login(
+                    _userNameController.text, _passwordController.text)) {
+                  print(authorizationStore.actualUser);
                   Modular.to.navigate("/task_module/",
-                      arguments: userStore.actualUser);
+                      arguments: authorizationStore.actualUser);
                 }
               },
               //onPressed: () => Modular.to.navigate("/tasks_page/"),

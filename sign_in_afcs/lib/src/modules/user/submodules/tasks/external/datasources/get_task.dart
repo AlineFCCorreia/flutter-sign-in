@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
-import 'package:sign_in_afcs/src/modules/user/tasks/domain/errors/tasks_errors.dart';
-import 'package:sign_in_afcs/src/modules/user/tasks/infra/adapters/task_adapter.dart';
-import 'package:sign_in_afcs/src/modules/user/tasks/infra/datasources/get_task.dart';
+import 'package:sign_in_afcs/src/modules/user/submodules/tasks/domain/errors/tasks_errors.dart';
+import 'package:sign_in_afcs/src/modules/user/submodules/tasks/infra/adapters/task_adapter.dart';
+import 'package:sign_in_afcs/src/modules/user/submodules/tasks/infra/datasources/get_task.dart';
 
 class GetTaskDataSource implements IGetTaskDataSource {
   final http.Client _client;

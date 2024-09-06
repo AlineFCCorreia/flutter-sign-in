@@ -1,10 +1,10 @@
-import 'package:sign_in_afcs/src/modules/user/tasks/domain/errors/tasks_errors.dart';
-import 'package:sign_in_afcs/src/modules/user/tasks/domain/repositories/tasks_repository.dart';
+import 'package:sign_in_afcs/src/modules/user/submodules/tasks/domain/errors/tasks_errors.dart';
+import 'package:sign_in_afcs/src/modules/user/submodules/tasks/domain/repositories/tasks_repository.dart';
 
-import 'package:sign_in_afcs/src/modules/user/tasks/infra/adapters/task_adapter.dart';
-import 'package:sign_in_afcs/src/modules/user/tasks/infra/datasources/add_task.dart';
-import 'package:sign_in_afcs/src/modules/user/tasks/infra/datasources/get_task.dart';
-import 'package:sign_in_afcs/src/modules/user/tasks/infra/proto/tasks.pb.dart';
+import 'package:sign_in_afcs/src/modules/user/submodules/tasks/infra/adapters/task_adapter.dart';
+import 'package:sign_in_afcs/src/modules/user/submodules/tasks/infra/datasources/add_task.dart';
+import 'package:sign_in_afcs/src/modules/user/submodules/tasks/infra/datasources/get_task.dart';
+import 'package:sign_in_afcs/src/modules/user/submodules/tasks/infra/proto/tasks.pb.dart';
 
 class TasksRepository implements ITasksRepository {
   final IAddTaskDataSource _addTaskDataSource;
