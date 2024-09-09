@@ -37,6 +37,8 @@ class GetTaskError extends TaskError {
   GetTaskError(super.message, [super.tracking]);
 }
 
-class TasksError extends TaskError {
-  TasksError(super.message, [super.tracking]);
+
+class RemoveTaskError extends TaskError {
+  RemoveTaskError(super.message, [super.tracking]);
 }
+

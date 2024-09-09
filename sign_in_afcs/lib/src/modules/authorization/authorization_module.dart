@@ -12,6 +12,7 @@ import 'package:sign_in_afcs/src/modules/authorization/presenter/pages/signin_pa
 import 'package:sign_in_afcs/src/modules/authorization/presenter/pages/signup_page.dart';
 import 'package:sign_in_afcs/src/modules/authorization/presenter/stores/authorization_store.dart';
 import 'package:http/http.dart' as http;
+import 'package:sign_in_afcs/src/modules/user/user_module.dart';
 
 class AuthorizationModule extends Module {
   @override
@@ -39,6 +40,6 @@ class AuthorizationModule extends Module {
   void routes(r) {
     r.child(Modular.initialRoute, child: (context) => const SignInPage());
     r.child("/sign_up/", child: (context) => const SignUpPage());
-    r.module("/task_module/", module: TasksModule());
+    r.module("/user_module/", module: UserModule());
   }
 }

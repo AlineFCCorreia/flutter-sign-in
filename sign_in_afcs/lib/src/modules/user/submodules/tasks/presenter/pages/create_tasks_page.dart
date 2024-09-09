@@ -30,13 +30,11 @@ class _CreateTasksPageState extends State<CreateTaskPage> {
         leading: IconButton(
           tooltip: 'Voltar para tasks',
           icon: const Icon(
-            Icons.home,
+            Icons.arrow_back,
           ),
-          color: const Color.fromARGB(255, 255, 255, 255),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text("Bem vindo ${widget.user?.name}"),
-        backgroundColor: const Color.fromRGBO(207, 116, 158, 1),
+        title: const Text("Adicionar tarefa"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -62,13 +60,14 @@ class _CreateTasksPageState extends State<CreateTaskPage> {
               height: 20,
             ),
             ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(50, 40),
-                ),
                 onPressed: () async {
                   await tasksStore.addTask(
                       _taskController.text, widget.user!.id);
-                  print(_taskController.text);
+                  _taskController.clear();
+
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('Task adicionada com sucesso!'),
+                      duration: Duration(seconds: 1)));
                 },
                 child: const Text('Add task')),
           ],

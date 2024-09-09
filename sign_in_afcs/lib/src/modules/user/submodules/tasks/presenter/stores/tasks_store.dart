@@ -1,6 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/domain/usecases/add_task.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/domain/usecases/get_task.dart';
+import 'package:sign_in_afcs/src/modules/user/submodules/tasks/domain/usecases/remove_task.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/infra/proto/tasks.pb.dart';
 
 part 'tasks_store.g.dart';
@@ -11,8 +12,10 @@ class TasksStore = _TasksStore with _$TasksStore;
 abstract class _TasksStore with Store {
   final IAddTaskUseCase addTasksUseCase;
   final IGetTasksUseCase getTasksUseCase;
+  final IRemoveTaskUseCase removeTaskUseCase;
   // final IGetTasksUseCase getTasksUseCase;
-  _TasksStore(this.addTasksUseCase, this.getTasksUseCase);
+  _TasksStore(
+      this.addTasksUseCase, this.getTasksUseCase, this.removeTaskUseCase);
 
   final actualTask = Task();
   List<Task> taskList = ObservableList<Task>();
@@ -47,5 +50,15 @@ abstract class _TasksStore with Store {
       return taskList;
     }
     return null;
+  }
+
+  Future<bool> removeTask(String taskId) async {
+    final response = await removeTaskUseCase.call(taskId);
+
+    if (response.$2 != null) {
+      taskList.removeWhere((task) => task.id == taskId);
+      return true;
+    }
+    return false;
   }
 }

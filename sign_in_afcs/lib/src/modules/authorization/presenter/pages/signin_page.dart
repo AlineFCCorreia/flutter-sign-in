@@ -60,9 +60,8 @@ class _SigninPageState extends State<SignInPage> {
           const SizedBox(
             height: 10,
           ),
-
           Observer(
-            builder: (_) =>  TextField(
+            builder: (_) => TextField(
               obscureText: authorizationStore.showPassword ? false : true,
               controller: _passwordController,
               onChanged: (value) {},
@@ -90,7 +89,7 @@ class _SigninPageState extends State<SignInPage> {
                 if (await authorizationStore.login(
                     _userNameController.text, _passwordController.text)) {
                   print(authorizationStore.actualUser);
-                  Modular.to.navigate("/task_module/",
+                  Modular.to.navigate("/user_module/",
                       arguments: authorizationStore.actualUser);
                 }
               },
