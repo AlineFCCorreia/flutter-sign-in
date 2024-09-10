@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:sign_in_afcs/src/modules/authorization/presenter/stores/authorization_store.dart';
+import 'package:sign_in_afcs/src/modules/authorization/infra/proto/user.pb.dart';
 import 'package:sign_in_afcs/src/modules/user/presenter/pages/components/sidebar.dart';
 import 'package:sign_in_afcs/src/modules/user/presenter/stores/user_store.dart';
 
 class UserPage extends StatefulWidget {
-  const UserPage({super.key});
+  final User user;
+  const UserPage({super.key, required this.user});
 
   @override
   State<UserPage> createState() => _UserPageState();
@@ -13,15 +14,12 @@ class UserPage extends StatefulWidget {
 
 class _UserPageState extends State<UserPage> {
   late final UserStore userStore;
-  late final AuthorizationStore authorizationStore;
 
   @override
   void initState() {
     super.initState();
     userStore = context.read<UserStore>();
-    authorizationStore = context.read<AuthorizationStore>();
-    Modular.to.navigate('/user_module/tasks_module/',
-        arguments: authorizationStore.actualUser);
+    Modular.to.navigate('/user_module/tasks_module/', arguments: widget.user);
     //userStore.changeRoute('Tasks', 'tasks_module');
   }
 
@@ -47,7 +45,7 @@ class _UserPageState extends State<UserPage> {
                   width: 125,
                   height: 125,
                 ),
-                Text("Bem vindo ${authorizationStore.actualUser.name}"),
+                Text("Bem vindo ${userStore.nameShortener(widget.user.name)}"),
               ],
             )),
 
@@ -55,7 +53,7 @@ class _UserPageState extends State<UserPage> {
       ),
       body: Row(
         children: [
-          Sidebar(authorizationStore: authorizationStore),
+          Sidebar(user: widget.user),
           const Expanded(child: RouterOutlet())
         ],
       ),

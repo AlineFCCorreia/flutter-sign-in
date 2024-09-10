@@ -28,15 +28,22 @@ class _ProfilePageState extends State<ProfilePage> {
       body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            //mainAxisAlignment: MainAxisAlignment.center,
+            //crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text("Perfil"),
+              const Center(
+                child: Text(
+                  "Perfil",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
               Text(authorizationStore.actualUser.name),
               const SizedBox(
                 height: 10,
               ),
-              Text(profileStore.userTitle)
             ],
           )),
     );

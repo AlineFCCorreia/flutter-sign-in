@@ -2,6 +2,7 @@ import 'package:mobx/mobx.dart';
 import 'package:sign_in_afcs/src/modules/authorization/domain/usecases/signin_usecase.dart';
 import 'package:sign_in_afcs/src/modules/authorization/domain/usecases/signup_usecase.dart';
 import 'package:sign_in_afcs/src/modules/authorization/infra/proto/user.pb.dart';
+import 'package:sign_in_afcs/src/modules/authorization/presenter/states/signin_state.dart';
 
 part 'authorization_store.g.dart';
 
@@ -12,6 +13,7 @@ abstract class _AuthorizationStore with Store {
   final ILoginUseCase loginUseCase;
   final ISignupUseCase signupUseCase;
   final actualUser = User();
+  final signinState = SigninState();
 
   _AuthorizationStore(this.loginUseCase, this.signupUseCase);
   //final usecase = UserUseCases(_repository)

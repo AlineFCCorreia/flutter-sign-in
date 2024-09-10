@@ -86,11 +86,13 @@ class _SigninPageState extends State<SignInPage> {
           ),
           ElevatedButton(
               onPressed: () async {
+                authorizationStore.signinState.clearError();
                 if (await authorizationStore.login(
                     _userNameController.text, _passwordController.text)) {
-                  print(authorizationStore.actualUser);
                   Modular.to.navigate("/user_module/",
                       arguments: authorizationStore.actualUser);
+                } else {
+                  authorizationStore.signinState.setAllError("message");
                 }
               },
               //onPressed: () => Modular.to.navigate("/tasks_page/"),

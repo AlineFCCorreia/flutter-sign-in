@@ -1,11 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:sign_in_afcs/src/modules/authorization/presenter/stores/authorization_store.dart';
+import 'package:sign_in_afcs/src/modules/authorization/infra/proto/user.pb.dart';
 
 class Sidebar extends StatelessWidget {
-  final AuthorizationStore authorizationStore;
-  const Sidebar({super.key, required this.authorizationStore});
+  final User user;
+  const Sidebar({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class Sidebar extends StatelessWidget {
                   recognizer: TapGestureRecognizer()
                     ..onTap = () => Modular.to.navigate(
                         "/user_module/profile_module/",
-                        arguments: authorizationStore.actualUser)),
+                        arguments: user)),
               textAlign: TextAlign.center,
             ),
             const SizedBox(
@@ -54,7 +54,7 @@ class Sidebar extends StatelessWidget {
                   recognizer: TapGestureRecognizer()
                     ..onTap = () => Modular.to.navigate(
                         "/user_module/tasks_module/",
-                        arguments: authorizationStore.actualUser)),
+                        arguments: user)),
               textAlign: TextAlign.center,
             ),
             const SizedBox(

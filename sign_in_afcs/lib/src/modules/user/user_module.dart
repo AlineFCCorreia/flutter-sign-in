@@ -18,7 +18,7 @@ class UserModule extends Module {
   @override
   void routes(r) {
     r.child(Modular.initialRoute,
-        child: (context) => const UserPage(),
+        child: (context) => UserPage(user: r.args.data),
         children: [
           ModuleRoute("/profile_module/", module: ProfileModule()),
           ModuleRoute("/tasks_module/", module: TasksModule())
