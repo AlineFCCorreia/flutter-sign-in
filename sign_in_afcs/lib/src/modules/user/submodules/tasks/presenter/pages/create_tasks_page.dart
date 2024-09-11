@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:sign_in_afcs/src/modules/authorization/presenter/stores/signup_store.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/presenter/stores/tasks_store.dart';
 import 'package:sign_in_afcs/src/modules/authorization/infra/proto/user.pb.dart';
 
@@ -47,29 +49,37 @@ class _CreateTasksPageState extends State<CreateTaskPage> {
             //Future<bool?> addTask(String task, String userId) async {
 
             const SizedBox(height: 24),
-            TextFormField(
-              controller: _taskController,
-              decoration: const InputDecoration(
-                labelText: "Add task",
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
+            Observer(
+              builder: (context) => TextFormField(
+                controller: _taskController,
+                onChanged: (value) => tasksStore.toggleEnableButton(value),
+                decoration: const InputDecoration(
+                  labelText: "Add task",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                ),
               ),
             ),
 
             const SizedBox(
               height: 20,
             ),
-            ElevatedButton(
-                onPressed: () async {
-                  await tasksStore.addTask(
-                      _taskController.text, widget.user!.id);
-                  _taskController.clear();
+            Observer(
+              builder: (context) => ElevatedButton(
+                  onPressed: tasksStore.enableButton
+                      ? () async {
+                          await tasksStore.addTask(
+                              _taskController.text, widget.user!.id);
+                          _taskController.clear();
 
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text('Task adicionada com sucesso!'),
-                      duration: Duration(seconds: 1)));
-                },
-                child: const Text('Add task')),
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text('Task adicionada com sucesso!'),
+                                  duration: Duration(seconds: 1)));
+                        }
+                      : null,
+                  child: const Text('Add task')),
+            ),
           ],
         ),
       ),

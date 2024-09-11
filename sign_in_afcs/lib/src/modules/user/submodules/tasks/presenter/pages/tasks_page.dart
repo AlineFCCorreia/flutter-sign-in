@@ -26,45 +26,6 @@ class _TaskPageState extends State<TaskPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: const Color.fromARGB(255, 233, 130, 130),
-      //   title: Text("Bem vindo ${widget.user?.name}"),
-      // ),
-      // drawer: Drawer(
-      //   child: ListView(
-      //     padding: const EdgeInsets.all(10),
-      //     children: [
-      //       const DrawerHeader(
-      //         decoration:
-      //             BoxDecoration(color: Color.fromRGBO(248, 160, 222, 1)),
-      //         child: Text(
-      //           "Sidebar",
-      //           style: TextStyle(color: Colors.white, fontSize: 24),
-      //         ),
-      //       ),
-      //       ListTile(
-      //         leading: const Icon(Icons.home),
-      //         title: const Text('Home'),
-      //         onTap: () {},
-      //       ),
-      //       ListTile(
-      //         leading: const Icon(Icons.task),
-      //         title: const Text('add Tasks'),
-      //         onTap: () {
-      //           Modular.to.pushNamed("/tasks_module/create_task",
-      //               arguments: widget.user);
-      //         },
-      //       ),
-      //       ListTile(
-      //         leading: const Icon(Icons.logout),
-      //         title: const Text('Logout'),
-      //         onTap: () {
-      //           Modular.to.navigate("/");
-      //         },
-      //       ),
-      //     ],
-      //   ),
-      // ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),

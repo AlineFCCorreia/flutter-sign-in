@@ -25,10 +25,41 @@ mixin _$TasksStore on _TasksStore, Store {
     });
   }
 
+  late final _$enableButtonAtom =
+      Atom(name: '_TasksStore.enableButton', context: context);
+
+  @override
+  bool get enableButton {
+    _$enableButtonAtom.reportRead();
+    return super.enableButton;
+  }
+
+  @override
+  set enableButton(bool value) {
+    _$enableButtonAtom.reportWrite(value, super.enableButton, () {
+      super.enableButton = value;
+    });
+  }
+
+  late final _$_TasksStoreActionController =
+      ActionController(name: '_TasksStore', context: context);
+
+  @override
+  void toggleEnableButton(String info) {
+    final _$actionInfo = _$_TasksStoreActionController.startAction(
+        name: '_TasksStore.toggleEnableButton');
+    try {
+      return super.toggleEnableButton(info);
+    } finally {
+      _$_TasksStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
-taskText: ${taskText}
+taskText: ${taskText},
+enableButton: ${enableButton}
     ''';
   }
 }

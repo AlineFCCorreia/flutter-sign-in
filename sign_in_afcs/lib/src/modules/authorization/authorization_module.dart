@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:sign_in_afcs/src/modules/user/submodules/tasks/tasks_module.dart';
+import 'package:sign_in_afcs/src/modules/authorization/presenter/stores/signin_store.dart';
+import 'package:sign_in_afcs/src/modules/authorization/presenter/stores/signup_store.dart';
 import 'package:sign_in_afcs/src/modules/authorization/domain/repositories/authorization_repository.dart';
 import 'package:sign_in_afcs/src/modules/authorization/domain/usecases/signin_usecase.dart';
 import 'package:sign_in_afcs/src/modules/authorization/domain/usecases/signup_usecase.dart';
@@ -10,7 +11,6 @@ import 'package:sign_in_afcs/src/modules/authorization/infra/datasources/signup_
 import 'package:sign_in_afcs/src/modules/authorization/infra/repositories/authorization_repository.dart';
 import 'package:sign_in_afcs/src/modules/authorization/presenter/pages/signin_page.dart';
 import 'package:sign_in_afcs/src/modules/authorization/presenter/pages/signup_page.dart';
-import 'package:sign_in_afcs/src/modules/authorization/presenter/stores/authorization_store.dart';
 import 'package:http/http.dart' as http;
 import 'package:sign_in_afcs/src/modules/user/user_module.dart';
 
@@ -33,7 +33,8 @@ class AuthorizationModule extends Module {
     i.add<ISignupUseCase>(SignupUseCase.new);
 
     // Stores
-    i.addSingleton(AuthorizationStore.new);
+    i.addSingleton(SignupStore.new);
+    i.addSingleton(SigninStore.new);
   }
 
   @override

@@ -25,6 +25,14 @@ abstract class _TasksStore with Store {
   @observable
   String taskText = '';
 
+  @observable
+  bool enableButton = false;
+
+  @action
+  void toggleEnableButton(String info){
+    enableButton = info.isNotEmpty;
+  }
+
   //Future<bool?> addTask(Uint8List taskEncoded);
   Future<bool?> addTask(String task, String userId) async {
     actualTask.userId = userId;

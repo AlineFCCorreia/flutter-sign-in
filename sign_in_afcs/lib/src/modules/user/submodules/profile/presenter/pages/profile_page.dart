@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:sign_in_afcs/src/modules/authorization/infra/proto/user.pb.dart';
-import 'package:sign_in_afcs/src/modules/authorization/presenter/stores/authorization_store.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/profile/presenter/stores/profile_store.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  final User? user;
+  const ProfilePage({super.key, required this.user});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -13,13 +13,13 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   late final ProfileStore profileStore;
-  late final AuthorizationStore authorizationStore;
+  
 
   @override
   void initState() {
     super.initState();
     profileStore = context.read<ProfileStore>();
-    authorizationStore = context.read<AuthorizationStore>();
+    
   }
 
   @override
@@ -40,7 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
               const SizedBox(
                 height: 10,
               ),
-              Text(authorizationStore.actualUser.name),
+              Text(widget.user!.name),
               const SizedBox(
                 height: 10,
               ),
