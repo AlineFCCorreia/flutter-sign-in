@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:sign_in_afcs/src/modules/authorization/presenter/stores/signup_store.dart';
+import 'package:sign_in_afcs/src/modules/user/submodules/tasks/presenter/pages/components/show_toast_tasks.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/presenter/stores/tasks_store.dart';
 import 'package:sign_in_afcs/src/modules/authorization/infra/proto/user.pb.dart';
 
@@ -72,10 +73,9 @@ class _CreateTasksPageState extends State<CreateTaskPage> {
                               _taskController.text, widget.user!.id);
                           _taskController.clear();
 
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content: Text('Task adicionada com sucesso!'),
-                                  duration: Duration(seconds: 1)));
+                          ShowToastTaskMessage.showTastMessage(
+                              "Task successfully added! ", context);
+                      
                         }
                       : null,
                   child: const Text('Add task')),

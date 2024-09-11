@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:sign_in_afcs/src/modules/authorization/presenter/pages/components/show_toast_auth.dart';
 import 'package:sign_in_afcs/src/modules/authorization/presenter/stores/signup_store.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -35,12 +36,14 @@ class _SignUpPageState extends State<SignUpPage> {
         builder: (context) =>
             reaction((p0) => signupStore.signupState.errorGetState, (p0) {
           if (p0 != null) {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                content: Text(
-                  'Não foi possível realizar o signup!',
-                  style: TextStyle(color: Color.fromRGBO(248, 122, 122, 1)),
-                ),
-                duration: Duration(seconds: 1)));
+            // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            //     content: Text(
+            //       'Não foi possível realizar o signup!',
+            //       style: TextStyle(color: Color.fromRGBO(248, 122, 122, 1)),
+            //     ),
+            //     duration: Duration(seconds: 1)));
+            ShowToastAuthMessage.showToastMessage(
+                "Error in sign up! ", context, true);
           }
         }),
         child: Column(

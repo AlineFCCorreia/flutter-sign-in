@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:sign_in_afcs/src/modules/authorization/presenter/pages/components/show_toast_auth.dart';
 import 'package:sign_in_afcs/src/modules/authorization/presenter/stores/signin_store.dart';
 
 class SignInPage extends StatefulWidget {
@@ -33,12 +34,14 @@ class _SigninPageState extends State<SignInPage> {
         builder: (context) =>
             reaction((p0) => signinStore.signinState.errorGetState, (p0) {
           if (p0 != null) {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                content: Text(
-                  'Senha ou usuário incorretos!',
-                  style: TextStyle(color: Color.fromRGBO(248, 122, 122, 1)),
-                ),
-                duration: Duration(seconds: 1)));
+            // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            //     content: Text(
+            //       'Senha ou usuário incorretos!',
+            //       style: TextStyle(color: Color.fromRGBO(248, 122, 122, 1)),
+            //     ),
+            //     duration: Duration(seconds: 1)));
+            ShowToastAuthMessage.showToastMessage(
+                "Username or password incorrects", context, true);
           }
         }),
         child: Column(
