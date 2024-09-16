@@ -20,8 +20,12 @@ class _TaskPageState extends State<TaskPage> {
   void initState() {
     super.initState();
     tasksStore = context.read<TasksStore>();
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => tasksStore.getTask(widget.user!.id));
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      tasksStore.getTask(widget.user!.id);
+      //var number = tasksStore.getTaskCount();
+      //print(number);
+    });
   }
 
   @override
@@ -35,19 +39,10 @@ class _TaskPageState extends State<TaskPage> {
               const SizedBox(
                 height: 20,
               ),
-              ElevatedButton(
-                  onPressed: () {
-                    Modular.to.pushNamed(
-                        "/user_module/tasks_module/create_task/",
-                        arguments: widget.user);
-                  },
-                  child: const Text("Create task")),
-              const SizedBox(
-                height: 20,
-              ),
               Observer(
                 builder: (_) => Expanded(
                   child: ListView.builder(
+                    
                     itemCount: tasksStore.taskList.length,
                     itemBuilder: (context, index) {
                       final actualTask = tasksStore.taskList[index];
@@ -68,6 +63,13 @@ class _TaskPageState extends State<TaskPage> {
                   ),
                 ),
               ),
+              ElevatedButton(
+                  onPressed: () {
+                    Modular.to.pushNamed(
+                        "/user_module/tasks_module/create_task/",
+                        arguments: widget.user);
+                  },
+                  child: const Text("Create task")),
             ],
           ),
         ),

@@ -3,6 +3,7 @@ import 'package:sign_in_afcs/src/modules/user/submodules/tasks/domain/usecases/a
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/domain/usecases/get_task.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/domain/usecases/remove_task.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/infra/proto/tasks.pb.dart';
+import 'package:sign_in_afcs/src/modules/user/infra/socket_client.dart';
 
 part 'tasks_store.g.dart';
 
@@ -13,9 +14,11 @@ abstract class _TasksStore with Store {
   final IAddTaskUseCase addTasksUseCase;
   final IGetTasksUseCase getTasksUseCase;
   final IRemoveTaskUseCase removeTaskUseCase;
+
+
   // final IGetTasksUseCase getTasksUseCase;
-  _TasksStore(
-      this.addTasksUseCase, this.getTasksUseCase, this.removeTaskUseCase);
+  _TasksStore(this.addTasksUseCase, this.getTasksUseCase,
+      this.removeTaskUseCase);
 
   final actualTask = Task();
   List<Task> taskList = ObservableList<Task>();
@@ -29,7 +32,7 @@ abstract class _TasksStore with Store {
   bool enableButton = false;
 
   @action
-  void toggleEnableButton(String info){
+  void toggleEnableButton(String info) {
     enableButton = info.isNotEmpty;
   }
 
@@ -69,4 +72,9 @@ abstract class _TasksStore with Store {
     }
     return false;
   }
+
+  
+
+  
+
 }

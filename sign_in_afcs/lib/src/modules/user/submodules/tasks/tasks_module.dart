@@ -6,10 +6,12 @@ import 'package:sign_in_afcs/src/modules/user/submodules/tasks/domain/usecases/r
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/external/datasources/add_task.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/external/datasources/get_task.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/external/datasources/remove_task.dart';
+import 'package:sign_in_afcs/src/modules/user/external/socket/socket_client.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/infra/datasources/add_task.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/infra/datasources/get_task.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/infra/datasources/remove_task.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/infra/repositories/tasks_repository.dart';
+import 'package:sign_in_afcs/src/modules/user/infra/socket_client.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/presenter/pages/create_tasks_page.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/presenter/pages/tasks_page.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/presenter/stores/tasks_store.dart';
@@ -20,6 +22,7 @@ class TasksModule extends Module {
   void binds(Injector i) {
     //Utils
     i.add(http.Client.new);
+    i.addSingleton<ISocketClient>(SocketClient.new);
 
     //Datasource
     i.add<IAddTaskDataSource>(AddTaskDataSource.new);

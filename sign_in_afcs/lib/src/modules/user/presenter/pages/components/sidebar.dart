@@ -1,11 +1,16 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mobx/mobx.dart';
 import 'package:sign_in_afcs/src/modules/authorization/infra/proto/user.pb.dart';
+import 'package:sign_in_afcs/src/modules/user/presenter/pages/components/menu_item.dart';
+import 'package:sign_in_afcs/src/modules/user/presenter/stores/user_store.dart';
 
 class Sidebar extends StatelessWidget {
   final User user;
-  const Sidebar({super.key, required this.user});
+  final String taskCount;
+  const Sidebar({super.key, required this.user, required this.taskCount});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +27,21 @@ class Sidebar extends StatelessWidget {
             const Image(
               image: AssetImage("assets/pikachu.gif"),
               width: 125,
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            InkWell(
+              borderRadius: BorderRadius.circular(15),
+              onTap: () {},
+              child: Observer(builder: (_) {
+                return const Tooltip(
+                  preferBelow: false,
+                  message: "ola",
+                  //onTriggered: ,
+                  child: Expanded(child: BuildIconItem()),
+                );
+              }),
             ),
             const SizedBox(
               height: 25,
@@ -57,6 +77,27 @@ class Sidebar extends StatelessWidget {
                         arguments: user)),
               textAlign: TextAlign.center,
             ),
+            const SizedBox(
+              height: 25,
+              
+            ),
+            Text.rich(
+              TextSpan(
+                  text: "Task Count: $taskCount",
+                  style: const TextStyle(
+                    color: Color.fromRGBO(253, 253, 253, 1),
+                    fontSize: 15,
+                    //fontWeight: FontWeight.bold,
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () => Modular.to.navigate(
+                        "/user_module/tasks_module/",
+                        arguments: user)),
+              textAlign: TextAlign.center,
+            ),
+
+
+
             const SizedBox(
               height: 25,
             ),

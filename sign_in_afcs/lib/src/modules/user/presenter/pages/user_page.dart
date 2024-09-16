@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:sign_in_afcs/src/modules/authorization/infra/proto/user.pb.dart';
 import 'package:sign_in_afcs/src/modules/user/presenter/pages/components/sidebar.dart';
@@ -19,6 +20,13 @@ class _UserPageState extends State<UserPage> {
   void initState() {
     super.initState();
     userStore = context.read<UserStore>();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      userStore.sendTasktIo(widget.user.id);
+      userStore.getTaskCount();
+    });
+    print("task count number: ${userStore.taskCountNumber} ");
+
     Modular.to.navigate('/user_module/tasks_module/', arguments: widget.user);
     //userStore.changeRoute('Tasks', 'tasks_module');
   }
@@ -53,7 +61,12 @@ class _UserPageState extends State<UserPage> {
       ),
       body: Row(
         children: [
-          Sidebar(user: widget.user),
+          Observer(
+            builder: (context) => Sidebar(
+              user: widget.user,
+              taskCount: userStore.taskCountNumber,
+            ),
+          ),
           const Expanded(child: RouterOutlet())
         ],
       ),
