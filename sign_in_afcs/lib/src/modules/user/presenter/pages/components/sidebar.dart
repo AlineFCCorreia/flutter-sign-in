@@ -31,21 +31,21 @@ class Sidebar extends StatelessWidget {
             const SizedBox(
               height: 25,
             ),
-            InkWell(
-              borderRadius: BorderRadius.circular(15),
-              onTap: () {},
-              child: Observer(builder: (_) {
-                return const Tooltip(
-                  preferBelow: false,
-                  message: "ola",
-                  //onTriggered: ,
-                  child: Expanded(child: BuildIconItem()),
-                );
-              }),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
+            // InkWell(
+            //   borderRadius: BorderRadius.circular(15),
+            //   onTap: () {},
+            //   child: Observer(builder: (_) {
+            //     return const Tooltip(
+            //       preferBelow: false,
+            //       message: "ola",
+            //       //onTriggered: ,
+            //       child: Expanded(child: BuildIconItem()),
+            //     );
+            //   }),
+            // ),
+            // const SizedBox(
+            //   height: 25,
+            // ),
             Text.rich(
               TextSpan(
                   text: "Perfil",
@@ -79,7 +79,6 @@ class Sidebar extends StatelessWidget {
             ),
             const SizedBox(
               height: 25,
-              
             ),
             Text.rich(
               TextSpan(
@@ -95,8 +94,6 @@ class Sidebar extends StatelessWidget {
                         arguments: user)),
               textAlign: TextAlign.center,
             ),
-
-
 
             const SizedBox(
               height: 25,

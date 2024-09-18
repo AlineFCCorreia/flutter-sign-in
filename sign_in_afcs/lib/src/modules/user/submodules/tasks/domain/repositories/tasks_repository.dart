@@ -10,4 +10,7 @@ abstract class ITasksRepository {
 
   Future<(ITaskError?, bool?)> removeTask(String taskId);
   //vai ser implementado na infra
+
+  Future<(ITaskError?, bool?)> editTask(Task task);
+  //vai ser implementado na infra
 }

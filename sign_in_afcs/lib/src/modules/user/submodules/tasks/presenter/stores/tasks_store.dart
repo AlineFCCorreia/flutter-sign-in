@@ -1,5 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/domain/usecases/add_task.dart';
+import 'package:sign_in_afcs/src/modules/user/submodules/tasks/domain/usecases/edit_task.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/domain/usecases/get_task.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/domain/usecases/remove_task.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/infra/proto/tasks.pb.dart';
@@ -14,11 +15,11 @@ abstract class _TasksStore with Store {
   final IAddTaskUseCase addTasksUseCase;
   final IGetTasksUseCase getTasksUseCase;
   final IRemoveTaskUseCase removeTaskUseCase;
-
+  final IEditTaskUseCase editTaskUseCase;
 
   // final IGetTasksUseCase getTasksUseCase;
   _TasksStore(this.addTasksUseCase, this.getTasksUseCase,
-      this.removeTaskUseCase);
+      this.removeTaskUseCase, this.editTaskUseCase);
 
   final actualTask = Task();
   List<Task> taskList = ObservableList<Task>();
@@ -40,7 +41,7 @@ abstract class _TasksStore with Store {
   Future<bool?> addTask(String task, String userId) async {
     actualTask.userId = userId;
     actualTask.task = task;
-    if (task != "") {
+    if (task.isNotEmpty) {
       final response = await addTasksUseCase.call(actualTask);
       if (response.$2 != null) {
         await getTask(userId);
@@ -68,13 +69,21 @@ abstract class _TasksStore with Store {
 
     if (response.$2 != null) {
       taskList.removeWhere((task) => task.id == taskId);
-      return true;
+      return response.$2!;
     }
     return false;
   }
 
-  
+  Future<bool> editTask(Task task, String newText) async {
 
-  
+    if (newText.isNotEmpty) {
+      task.task = newText;
+      final response = await editTaskUseCase.call(task);
+      if (response.$2 != null) {
+        return response.$2!;
+      }
+    }
 
+    return false;
+  }
 }
