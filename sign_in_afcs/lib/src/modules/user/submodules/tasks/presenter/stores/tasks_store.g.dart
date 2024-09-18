@@ -41,6 +41,69 @@ mixin _$TasksStore on _TasksStore, Store {
     });
   }
 
+  late final _$colorAtom = Atom(name: '_TasksStore.color', context: context);
+
+  @override
+  String get color {
+    _$colorAtom.reportRead();
+    return super.color;
+  }
+
+  @override
+  set color(String value) {
+    _$colorAtom.reportWrite(value, super.color, () {
+      super.color = value;
+    });
+  }
+
+  late final _$greenColorSelectedAtom =
+      Atom(name: '_TasksStore.greenColorSelected', context: context);
+
+  @override
+  bool get greenColorSelected {
+    _$greenColorSelectedAtom.reportRead();
+    return super.greenColorSelected;
+  }
+
+  @override
+  set greenColorSelected(bool value) {
+    _$greenColorSelectedAtom.reportWrite(value, super.greenColorSelected, () {
+      super.greenColorSelected = value;
+    });
+  }
+
+  late final _$redColorSelectedAtom =
+      Atom(name: '_TasksStore.redColorSelected', context: context);
+
+  @override
+  bool get redColorSelected {
+    _$redColorSelectedAtom.reportRead();
+    return super.redColorSelected;
+  }
+
+  @override
+  set redColorSelected(bool value) {
+    _$redColorSelectedAtom.reportWrite(value, super.redColorSelected, () {
+      super.redColorSelected = value;
+    });
+  }
+
+  late final _$yellowColorSelectedAtom =
+      Atom(name: '_TasksStore.yellowColorSelected', context: context);
+
+  @override
+  bool get yellowColorSelected {
+    _$yellowColorSelectedAtom.reportRead();
+    return super.yellowColorSelected;
+  }
+
+  @override
+  set yellowColorSelected(bool value) {
+    _$yellowColorSelectedAtom.reportWrite(value, super.yellowColorSelected, () {
+      super.yellowColorSelected = value;
+    });
+  }
+
   late final _$_TasksStoreActionController =
       ActionController(name: '_TasksStore', context: context);
 
@@ -56,10 +119,47 @@ mixin _$TasksStore on _TasksStore, Store {
   }
 
   @override
+  void greenColorButtonSelect() {
+    final _$actionInfo = _$_TasksStoreActionController.startAction(
+        name: '_TasksStore.greenColorButtonSelect');
+    try {
+      return super.greenColorButtonSelect();
+    } finally {
+      _$_TasksStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void yellowColorButtonSelect() {
+    final _$actionInfo = _$_TasksStoreActionController.startAction(
+        name: '_TasksStore.yellowColorButtonSelect');
+    try {
+      return super.yellowColorButtonSelect();
+    } finally {
+      _$_TasksStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void redColorButtonSelect() {
+    final _$actionInfo = _$_TasksStoreActionController.startAction(
+        name: '_TasksStore.redColorButtonSelect');
+    try {
+      return super.redColorButtonSelect();
+    } finally {
+      _$_TasksStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 taskText: ${taskText},
-enableButton: ${enableButton}
+enableButton: ${enableButton},
+color: ${color},
+greenColorSelected: ${greenColorSelected},
+redColorSelected: ${redColorSelected},
+yellowColorSelected: ${yellowColorSelected}
     ''';
   }
 }

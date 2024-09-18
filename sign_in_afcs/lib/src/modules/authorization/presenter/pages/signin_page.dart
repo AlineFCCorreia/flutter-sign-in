@@ -104,6 +104,7 @@ class _SigninPageState extends State<SignInPage> {
                           signinStore.signinState.clearError();
                           if (await signinStore.login(_userNameController.text,
                               _passwordController.text)) {
+                            signinStore.enableButton = false;
                             Modular.to.navigate("/user_module/",
                                 arguments: signinStore.actualUser);
                           } else {

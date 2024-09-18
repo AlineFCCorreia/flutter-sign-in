@@ -32,9 +32,47 @@ abstract class _TasksStore with Store {
   @observable
   bool enableButton = false;
 
+  @observable
+  String color = "g";
+
+  @observable
+  bool greenColorSelected = true;
+
+  @observable
+  bool redColorSelected = false;
+
+  @observable
+  bool yellowColorSelected = false;
+
+  List<bool> colors = [true, false, false];
+
   @action
   void toggleEnableButton(String info) {
     enableButton = info.isNotEmpty;
+  }
+
+  @action
+  void greenColorButtonSelect() {
+    greenColorSelected = true;
+    redColorSelected = false;
+    yellowColorSelected = false;
+    color = "g";
+  }
+
+  @action
+  void yellowColorButtonSelect() {
+    greenColorSelected = false;
+    redColorSelected = false;
+    yellowColorSelected = true;
+    color = "y";
+  }
+
+  @action
+  void redColorButtonSelect() {
+    greenColorSelected = false;
+    redColorSelected = true;
+    yellowColorSelected = false;
+    color = "r";
   }
 
   //Future<bool?> addTask(Uint8List taskEncoded);
@@ -75,7 +113,6 @@ abstract class _TasksStore with Store {
   }
 
   Future<bool> editTask(Task task, String newText) async {
-
     if (newText.isNotEmpty) {
       task.task = newText;
       final response = await editTaskUseCase.call(task);
