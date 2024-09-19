@@ -4,7 +4,7 @@ import 'package:sign_in_afcs/src/modules/user/submodules/tasks/domain/usecases/e
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/domain/usecases/get_task.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/domain/usecases/remove_task.dart';
 import 'package:sign_in_afcs/src/modules/user/submodules/tasks/infra/proto/tasks.pb.dart';
-import 'package:sign_in_afcs/src/modules/user/infra/socket_client.dart';
+
 
 part 'tasks_store.g.dart';
 
