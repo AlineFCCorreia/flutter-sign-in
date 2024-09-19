@@ -79,6 +79,8 @@ def edit_task_by_id(self):
 ## To run this project
 
 1. ```flutter packages pub run build_runner build``` to generate mobx content.
-2. Check your sdk version in ```pubspec.yaml```
-3. ```flutter run```
+2. ```protoc --dart_out=. <path/to/messages.proto>``` to generate protobuf content e.g. ```./lib/src/.../user.proto``` 
+3. Check your sdk version in ```pubspec.yaml```
+4. ```flutter run```
+
 
