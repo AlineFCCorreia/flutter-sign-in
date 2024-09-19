@@ -11,11 +11,10 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
-    const primaryColorLigth = Color.fromRGBO(241, 213, 201,1);
+    const primaryColorLigth = Color.fromRGBO(226, 105, 105, 1);
     const primaryColorDark = Color.fromRGBO(245, 175, 159, 1);
 
- 
- return MaterialApp.router(
+    return MaterialApp.router(
       title: 'Flutter Demo',
       theme: ThemeData(
         expansionTileTheme: const ExpansionTileThemeData(
@@ -51,7 +50,6 @@ class _MainAppState extends State<MainApp> {
         checkboxTheme: const CheckboxThemeData(
           side: BorderSide(color: primaryColorLigth),
         ),
-        
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: primaryColorLigth,
@@ -59,7 +57,6 @@ class _MainAppState extends State<MainApp> {
             textStyle: const TextStyle(fontWeight: FontWeight.normal),
           ),
         ),
-        
         useMaterial3: true,
       ),
       darkTheme: ThemeData(
@@ -94,7 +91,6 @@ class _MainAppState extends State<MainApp> {
         checkboxTheme: const CheckboxThemeData(
           side: BorderSide(color: primaryColorDark),
         ),
-       
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: primaryColorDark,
@@ -102,13 +98,10 @@ class _MainAppState extends State<MainApp> {
             textStyle: const TextStyle(fontWeight: FontWeight.normal),
           ),
         ),
-      
         useMaterial3: true,
       ),
-       // 2) ← ← ← use "state" field here //////////////
+      // 2) ← ← ← use "state" field here //////////////
       routerConfig: Modular.routerConfig,
     );
   }
-
-  
 }
